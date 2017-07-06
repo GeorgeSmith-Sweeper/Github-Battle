@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import fetchPopularRepos from '../utils/api';
 
 function SelectLanguage(props) {
   const languages = ['All', 'JavaScript', 'Ruby', 'Java', 'CSS', 'Python'];
@@ -26,13 +27,21 @@ SelectLanguage.PropTypes = {
   onSelect: PropTypes.func.isRequired,
 };
 
+
+
 class Popular extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       selectedLanguage: 'All',
+      repos: null,
     };
     this.updateLanguage = this.updateLanguage.bind(this);
+  }
+
+  componentDidMount() {
+    fetchPopularRepos(this.state.selectedLanguage)
+      .then(repo => console.log(repo));
   }
 
   updateLanguage(lang) {
