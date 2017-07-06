@@ -1,7 +1,7 @@
 import React from 'react';
 
 class Battle extends React.Component {
-  render () {
+  render() {
     return (
       <div>
         Battle
