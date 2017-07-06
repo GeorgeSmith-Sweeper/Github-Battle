@@ -1,14 +1,26 @@
+import {
+  BrowserRouter as Router,
+  Route,
+} from 'react-router-dom';
 import React from 'react';
 import Popular from './Popular';
+import Nav from './Nav';
+import Home from './Home';
 
 class App extends React.Component {
   render() {
     return (
-      <div className="container">
-        <Popular />
-      </div>
+      <Router>
+        <div className="container">
+          <Nav />
+          <Route exact path="/" component={Home} />
+          <Route path="/popular" component={Popular} />
+        </div>
+      </Router>
     );
   }
 }
 
-module.exports = App;
+export default App;
+
+
