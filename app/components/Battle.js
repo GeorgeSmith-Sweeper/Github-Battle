@@ -18,7 +18,7 @@ class PlayerInput extends React.Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    this.props.onSubmit(this.props.id, this.props.username);
+    this.props.onSubmit(this.props.id, this.state.username);
   }
 
   render() {
@@ -65,7 +65,6 @@ class Battle extends React.Component {
   }
 
   handleSubmit(id, username) {
-    console.log(id, username);
     this.setState(() => {
       let newState = {};
       newState[`${id}Name`] = username;
