@@ -1,7 +1,59 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+
+class PlayerInput extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      username: '',
+    };
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  handleChange(e) {
+    let value = e.target.value;
+    this.setState({ username: value });
+  }
+
+  handleSubmit(e) {
+    e.preventDefault();
+    this.props.onSubmit(this.props.id, this.props.username);
+  }
+
+  render() {
+    return (
+      <form className="column" onSubmit={this.handleSubmit}>
+        <label className="header" htmlFor="username">
+          {this.props.label}
+        </label>
+        <input
+          id="username"
+          placeholder="github username"
+          type="text"
+          autoComplete="off"
+          value={this.state.username}
+          onChange={this.handleChange}
+        />
+        <button
+          className="button"
+          type="submit"
+          disabled={!this.state.username}>
+            Submit
+        </button>
+      </form>
+    );
+  }
+}
+
+PlayerInput.proptypes = {
+  id: PropTypes.string.isRequired,
+  label: PropTypes.string.isRequired,
+  onSubmit: PropTypes.func.isRequired,
+};
 
 class Battle extends React.Component {
-  constructor (props) {
+  constructor(props) {
     super(props);
     this.state = {
       playerOneName: '',
@@ -11,7 +63,9 @@ class Battle extends React.Component {
     };
     this.handleSubmit = this.handleSubmit.bind(this);
   }
+
   handleSubmit(id, username) {
+    console.log(id, username);
     this.setState(() => {
       let newState = {};
       newState[`${id}Name`] = username;
@@ -19,11 +73,27 @@ class Battle extends React.Component {
       return newState;
     });
   }
+
   render() {
+    const playerOneName = this.state.playerOneName;
+    const playerTwoName = this.state.playerTwoName;
+
     return (
       <div>
         <div className="row">
-          ROW
+          {!playerOneName &&
+            <PlayerInput
+              id="playerOne"
+              label="Player One"
+              onSubmit={this.handleSubmit}
+            />}
+
+          {!playerTwoName &&
+            <PlayerInput
+              id="playerTwo"
+              label="Player Two"
+              onSubmit={this.handleSubmit}
+            />}
         </div>
       </div>
     );
