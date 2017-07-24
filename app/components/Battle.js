@@ -8,7 +8,7 @@ function PlayerPreview(props) {
         <img
           className="avatar"
           src={props.avatar}
-          alt={`Avatar for ${prop.username}`}
+          alt={`Avatar for ${props.username}`}
         />
         <h2 className="username">@{props.username}</h2>
       </div>
@@ -66,7 +66,8 @@ class PlayerInput extends React.Component {
         <button
           className="button"
           type="submit"
-          disabled={!this.state.username}>
+          disabled={!this.state.username}
+        >
             Submit
         </button>
       </form>
@@ -90,6 +91,7 @@ class Battle extends React.Component {
       playerTwoImage: null,
     };
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleReset = this.handleReset.bind(this);
   }
 
   handleSubmit(id, username) {
@@ -101,12 +103,21 @@ class Battle extends React.Component {
     });
   }
 
+  handleReset(id) {
+    this.setState(() => {
+      let newState = {};
+      newState[`${id}Name`] = '';
+      newState[`${id}Image`] = null;
+      return newState;
+    });
+  }
+
   render() {
     const playerOneName = this.state.playerOneName;
     const playerTwoName = this.state.playerTwoName;
     const playerOneImage = this.state.playerOneImage;
     const playerTwoImage = this.state.playerTwoImage;
-
+    // check 5:57 on Dynamic Rendering!
     return (
       <div>
         <div className="row">
@@ -116,6 +127,24 @@ class Battle extends React.Component {
               label="Player One"
               onSubmit={this.handleSubmit}
             />}
+
+          {playerOneImage !== null &&
+            <PlayerPreview
+              avatar={playerOneImage}
+              username={playerOneName}
+              onReset={this.handleReset}
+              id="playerOne"
+            />
+          }
+
+          {playerTwoImage !== null &&
+            <PlayerPreview
+              avatar={playerTwoImage}
+              username={playerTwoName}
+              onReset={this.handleReset}
+              id="playerTwo"
+            />
+          }
 
           {!playerTwoName &&
             <PlayerInput
