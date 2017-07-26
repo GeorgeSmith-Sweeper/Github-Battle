@@ -44,7 +44,7 @@ function getUserData(player) {
       profile,
       score: calculateScore(profile, repos),
     };
-  })
+  });
 }
 
 function sortPlayers(players) {

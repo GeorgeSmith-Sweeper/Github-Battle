@@ -119,7 +119,7 @@ class Battle extends React.Component {
     const playerTwoName = this.state.playerTwoName;
     const playerOneImage = this.state.playerOneImage;
     const playerTwoImage = this.state.playerTwoImage;
-    // check 5:57 on Dynamic Rendering!
+
     return (
       <div>
         <div className="row">
@@ -139,6 +139,13 @@ class Battle extends React.Component {
             />
           }
 
+          {!playerTwoName &&
+            <PlayerInput
+              id="playerTwo"
+              label="Player Two"
+              onSubmit={this.handleSubmit}
+            />}
+
           {playerTwoImage !== null &&
             <PlayerPreview
               avatar={playerTwoImage}
@@ -148,19 +155,13 @@ class Battle extends React.Component {
             />
           }
 
-          {!playerTwoName &&
-            <PlayerInput
-              id="playerTwo"
-              label="Player Two"
-              onSubmit={this.handleSubmit}
-            />}
         </div>
         {playerOneImage && playerTwoImage &&
           <Link
             className="button"
             to={{
               pathname: `${match.url}/results`,
-              search: `?playerOneName=${playerOneName}&${playerTwoName}`,
+              search: `?playerOneName=${playerOneName}&playerTwoName=${playerTwoName}`,
             }}
           >
             Battle!
