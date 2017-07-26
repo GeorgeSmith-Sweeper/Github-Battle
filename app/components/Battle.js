@@ -106,8 +106,7 @@ class Battle extends React.Component {
           {playerOneImage !== null &&
             <PlayerPreview
               avatar={playerOneImage}
-              username={playerOneName}
-              id="playerOne">
+              username={playerOneName}>
               <button
                 className="reset"
                 onClick={this.handleReset.bind(null, 'playerOne')}>
@@ -126,8 +125,7 @@ class Battle extends React.Component {
           {playerTwoImage !== null &&
             <PlayerPreview
               avatar={playerTwoImage}
-              username={playerTwoImage}
-              id="playerTwo">
+              username={playerTwoImage}>
               <button
                 className="reset"
                 onClick={this.handleReset.bind(null, 'playerTwo')}>
