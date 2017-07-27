@@ -81,7 +81,7 @@ class Results extends React.Component {
     const loading = this.state.loading;
 
     if (loading) {
-      return <Loading text="Loading"/>;
+      return <Loading />;
     }
 
     if (error) {

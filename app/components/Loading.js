@@ -15,6 +15,32 @@ class Loading extends React.Component {
       text: props.text,
     };
   }
+
+  // will add the loading animation dots every 300 milliseconds
+  componentDidMount() {
+    const stopper = `${this.props.text}...`;
+    this.interval = window.setInterval(() => {
+      if (this.state.text === stopper) {
+        this.setState(() => {
+          return {
+            text: this.props.text,
+          };
+        });
+      } else {
+        this.setState((prevState) => {
+          return {
+            text: `${prevState.text}.`,
+          };
+        });
+      }
+    }, this.props.speed);
+  }
+
+  // stops the loading interval from being repeatedly called
+  componentWillUnmount() {
+    window.clearInterval(this.interval);
+  }
+
   render() {
     return (
       <p style={styles.content}>
@@ -26,11 +52,14 @@ class Loading extends React.Component {
 
 Loading.propTypes = {
   text: PropTypes.string.isRequired,
+  speed: PropTypes.number.isRequired,
 };
 
-// if the prop.text isn't specified, make text 'Loading'
+// if the prop.text isn't specified, make text 'Loading',
+
 Loading.defaultProps = {
   text: 'Loading',
+  speed: 300,
 };
 
 export default Loading;
