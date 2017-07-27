@@ -8,9 +8,8 @@ const styles = {
   },
 };
 
-
 class Loading extends React.Component {
-  constructor() {
+  constructor(props) {
     super(props);
     this.state = {
       text: props.text,
@@ -24,5 +23,14 @@ class Loading extends React.Component {
     );
   }
 }
+
+Loading.propTypes = {
+  text: PropTypes.string.isRequired,
+};
+
+// if the prop.text isn't specified, make text 'Loading'
+Loading.defaultProps = {
+  text: 'Loading',
+};
 
 export default Loading;
