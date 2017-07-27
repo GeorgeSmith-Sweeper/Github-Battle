@@ -81,7 +81,7 @@ class Results extends React.Component {
     const loading = this.state.loading;
 
     if (loading) {
-      return <Loading />;
+      return <Loading text="Calculating" speed={100} />;
     }
 
     if (error) {
